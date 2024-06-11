@@ -1,0 +1,17 @@
+class DatabaseRepository {
+   private static volatile DatabaseRepository instance;
+
+    private DatabaseRepository(){
+
+    }
+    static DatabaseRepository getConnection(){
+            if(instance == null){
+              synchroinzed(DatabaseRepository.class) { // double check lock
+                if(instance == null){
+                    instance = new DatabaseRepository();
+                }
+              } 
+            }
+ return instance;
+}
+}
